@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -111,6 +113,11 @@ class MapMarkersFragment : Fragment() {
         val marker = MapMarker(requireContext(), x, y, "special marker").apply {
             setColorFilter(ContextCompat.getColor(this.context, R.color.colorAccent))
             setImageResource(R.drawable.map_marker_circle)
+            val anim = AlphaAnimation(0.0f, 1.0f)
+            anim.duration = 1000
+            anim.repeatCount = Animation.INFINITE
+            anim.repeatMode = Animation.REVERSE
+            this.startAnimation(anim)
         }
 
         /* Since the marker is circular, we want to center it on the position. So we use 0.5f as
